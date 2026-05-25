@@ -1,0 +1,127 @@
+{
+    "model": "epicfight:entity/biped_old_texture",
+    "armature": "epicfight:entity/biped",
+    "renderer": "minecraft:skeleton",
+    "isHumanoid": true,
+    "faction": "undead",
+    "attributes": {
+        "impact": 0.5,
+        "armor_negation": 0,
+        "max_strikes": 1,
+        "chasing_speed": 0.8,
+        "max_stamina": 60,
+        "stamina_regan_multiply": 0.7,
+        "stamina_regan_delay": 300,
+        "has_stun_reduction": false,
+        "max_stun_shield": 0,
+        "stun_shield_regan_multiply": 0,
+        "stun_shield_regan_delay": 999999,
+        "guard_radius": 0,
+        "stamina_lose_multiply": 1,
+        "attack_radius": 0
+    },
+    "default_livingmotions": {
+        "idle": "epicfight:biped/living/idle",
+        "walk": "epicfight:biped/living/walk",
+        "chase": "epicfight:biped/living/walk",
+        "mount": "epicfight:biped/living/mount",
+        "fall": "epicfight:biped/living/fall",
+        "death": "epicfight:biped/living/death"
+    },
+    "stun_animations": {
+        "short": "epicfight:biped/combat/hit_short",
+        "long": "epicfight:biped/combat/hit_long",
+        "knockdown": "epicfight:biped/combat/knockdown",
+        "fall": "epicfight:biped/living/landing",
+        "neutralize": "epicfight:biped/skill/guard_break1"
+    },
+    "combat_behavior": [
+        {
+            "weapon_categories": ["bow", "crossbow"],
+            "style": "common",
+            "behavior_series": [
+                {
+                    "weight": 2.0,
+                    "canBeInterrupted": true,
+                    "looping": false,
+                    "cooldown": 20,
+                    "behaviors": [
+                        {
+                            "conditions": [
+                                {"predicate": "indestructible:attack_level", "min": 1, "max": 1},
+                                {"predicate": "epicfight:within_eye_height"},
+                                {"predicate": "epicfight:within_distance", "min": 0.0, "max": 1.5}
+                            ],
+                            "animation": "epicfight:biped/skill/step_backward",
+                            "convert_time": 0.5,
+                            "stamina": 15,
+                            "play_speed": 1.1
+                        }
+                    ]
+                },
+                {
+                    "weight": 2.0,
+                    "canBeInterrupted": true,
+                    "looping": false,
+                    "cooldown": 25,
+                    "behaviors": [
+                        {
+                            "conditions": [
+                                {"predicate": "indestructible:attack_level", "min": 1, "max": 1},
+                                {"predicate": "epicfight:within_eye_height"},
+                                {"predicate": "epicfight:within_distance", "min": 0.0, "max": 1.5}
+                            ],
+                            "animation": "epicfight:biped/skill/step_backward",
+                            "convert_time": 0.3,
+                            "stamina": 15,
+                            "play_speed": 1.1
+                        },
+                        {
+                            "conditions": [
+                                {"predicate": "epicfight:within_distance", "min": 0.0, "max": 32.0}
+                            ],
+                            "animation": "epicfight:biped/skill/step_backward",
+                            "stamina": 15,
+                            "play_speed": 1.1
+                        }
+                    ]
+                },
+                {
+                    "weight": 1.5,
+                    "canBeInterrupted": true,
+                    "looping": false,
+                    "cooldown": 50,
+                    "behaviors": [
+                        {
+                            "conditions": [
+                                {"predicate": "indestructible:stamina", "stamina": 0.15, "comparator": "less_ratio"},
+                                {"predicate": "epicfight:within_distance", "min": 1.5, "max": 32.0}
+                            ],
+                            "wander": 40,
+                            "inaction_time": 20,
+                            "x_axis": 0.5,
+                            "z_axis": 180
+                        }
+                    ]
+                },
+                {
+                    "weight": 1.0,
+                    "canBeInterrupted": false,
+                    "looping": false,
+                    "cooldown": 0,
+                    "behaviors": [
+                        {
+                            "conditions": [
+                                {"predicate": "epicfight:within_distance", "min": 0.0, "max": 32.0}
+                            ],
+                            "wander": 20,
+                            "inaction_time": 15,
+                            "x_axis": 0.5,
+                            "z_axis": 270
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
