@@ -561,26 +561,6 @@
   },
   {
     "mob": [
-      "eidolon:zombie_brute"
-    ],
-    "result": "default",
-    "random": 0.30,
-    "nbt": {
-      "HandItems": [
-        {
-          "id": "epicfight:stone_greatsword",
-          "Count": 1
-        },
-        {
-          "id": "minecraft:air",
-          "Count": 1
-        }
-      ],
-      "HandDropChances": [0.0, 0.0]
-    }
-  },
-  {
-    "mob": [
       "minecraft:piglin"
     ],
     "result": "default",
@@ -601,8 +581,10 @@
   },
   {
     "mod": "bf_biomes",
-    "maxcount": 10,
-    "perchunk": true,
+    "maxcount": {
+        "amount": 15,
+        "perchunk": true
+    },
     "result": "allow"
   },
   {
