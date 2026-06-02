@@ -1,0 +1,10 @@
+{
+  "condition": "epicfight:is_one_handed",
+  "executors": [
+    {
+      "type": "epicfight:set_skill_priority",
+      "target": "blocking",
+      "priority": 0
+    }
+  ]
+}
