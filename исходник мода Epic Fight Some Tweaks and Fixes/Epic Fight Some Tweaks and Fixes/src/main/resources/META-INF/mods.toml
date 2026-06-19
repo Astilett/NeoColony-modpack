@@ -1,0 +1,37 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="All rights reserved"
+issueTrackerURL=""
+
+[[mods]]
+modId="epictweak"
+version="1.0.0"
+displayName="Epic Fight Tweak"
+logoFile=""
+credits=""
+authors="Astilett"
+description='''
+Epic Fight animation cancel with Z key.
+Sharp stab pierces shields.
+'''
+
+[[dependencies.epictweak]]
+modId="forge"
+mandatory=true
+versionRange="[47.4.10,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.epictweak]]
+modId="minecraft"
+mandatory=true
+versionRange="[1.20.1]"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.epictweak]]
+modId="epicfight"
+mandatory=true
+versionRange="[20.12.4,)"
+ordering="AFTER"
+side="BOTH"

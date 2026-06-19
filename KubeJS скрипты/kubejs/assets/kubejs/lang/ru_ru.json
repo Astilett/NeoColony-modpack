@@ -1,0 +1,4 @@
+{
+    "death.attack.bleeding_damage": "%1$s истёк кровью",
+    "death.attack.bleeding_damage.player": "%1$s истёк кровью от рук %2$s"
+}

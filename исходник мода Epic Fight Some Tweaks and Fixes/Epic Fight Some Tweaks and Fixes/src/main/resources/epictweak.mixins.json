@@ -1,0 +1,15 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "com.astilett.epictweak.mixin",
+    "compatibilityLevel": "JAVA_17",
+    "refmap": "epictweak.refmap.json",
+    "mixins": [
+        "ShieldPierceMixin",
+        "MeteorSkillMixin",
+        "GuardAnimationMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

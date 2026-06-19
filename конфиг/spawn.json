@@ -588,6 +588,10 @@
     "result": "allow"
   },
   {
+      "mob": "eidolon:zombie_brute",
+      "result": "deny"
+  },
+  {
     "result": "default"
   }
 ]

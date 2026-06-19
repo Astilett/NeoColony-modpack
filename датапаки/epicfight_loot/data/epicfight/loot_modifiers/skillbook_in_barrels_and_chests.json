@@ -1,0 +1,37 @@
+{
+  "type": "forge:add_loot_table",
+  "conditions": [
+    {
+      "condition": "forge:or",
+      "terms": [
+        {
+          "condition": "forge:and",
+          "terms": [
+            {
+              "condition": "forge:loot_table_id",
+              "loot_table_id": ".*:chests/(?!.*barrel).*"
+            },
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.007
+            }
+          ]
+        },
+        {
+          "condition": "forge:and",
+          "terms": [
+            {
+              "condition": "forge:loot_table_id",
+              "loot_table_id": ".*:chests/.*barrel.*"
+            },
+            {
+              "condition": "minecraft:random_chance",
+              "chance": 0.003
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "loot_table": "epicfight:loot_tables/skillbook_drop"
+}
