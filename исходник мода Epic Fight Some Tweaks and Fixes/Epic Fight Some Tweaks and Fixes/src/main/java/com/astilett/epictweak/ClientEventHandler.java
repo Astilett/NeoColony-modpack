@@ -7,9 +7,9 @@ import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import yesman.epicfight.api.animation.types.DynamicAnimation;
+import yesman.epicfight.client.world.capabilites.entitypatch.player.LocalPlayerPatch;
 import yesman.epicfight.gameasset.Animations;
 import yesman.epicfight.world.capabilities.EpicFightCapabilities;
-import yesman.epicfight.world.capabilities.entitypatch.player.PlayerPatch;
 
 @Mod.EventBusSubscriber(modid = "epictweak", value = Dist.CLIENT)
 public class ClientEventHandler {
@@ -27,9 +27,7 @@ public class ClientEventHandler {
         boolean isKeyDown = KeyBindings.CANCEL_ANIMATION_KEY.isDown();
 
         if (isKeyDown && !wasKeyDown) {
-            PlayerPatch<?> playerPatch = (PlayerPatch<?>) player.getCapability(
-                    EpicFightCapabilities.CAPABILITY_ENTITY
-            ).orElse(null);
+            LocalPlayerPatch playerPatch = EpicFightCapabilities.getEntityPatch(player, LocalPlayerPatch.class);
 
             if (playerPatch != null) {
                 DynamicAnimation currentAnim = playerPatch.getClientAnimator()
@@ -40,16 +38,11 @@ public class ClientEventHandler {
 
                     if (!animId.contains("guard_break") &&
                             !animId.contains("stamina_exhaust") &&
-                            !animId.contains("exhaustion")) {
+                            !animId.contains("exhaustion") &&
+                            !player.isFallFlying() &&
+                            !player.getAbilities().flying) {
 
-                        currentAnim.end(
-                                playerPatch,
-                                Animations.BIPED_IDLE,
-                                false
-                        );
-                        playerPatch.getClientAnimator().playAnimation(
-                                Animations.BIPED_IDLE, 0.0f
-                        );
+                        playerPatch.playAnimationSynchronized(Animations.BIPED_IDLE, 0.0f);
                     }
                 }
             }

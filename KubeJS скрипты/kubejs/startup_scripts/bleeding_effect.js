@@ -3,9 +3,3 @@ StartupEvents.registry('mob_effect', event => {
         .harmful()
         .color(0x8B0000);
 });
-
-StartupEvents.registry('damage_source', event => {
-    event.create('bleeding_damage')
-        .bypassArmor()
-        .magic();
-});

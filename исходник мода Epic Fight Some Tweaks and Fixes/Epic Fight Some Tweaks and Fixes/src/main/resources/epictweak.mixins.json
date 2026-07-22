@@ -5,8 +5,9 @@
     "compatibilityLevel": "JAVA_17",
     "refmap": "epictweak.refmap.json",
     "mixins": [
-        "ShieldPierceMixin",
-        "MeteorSkillMixin",
+        "ShieldPierceMixin"
+    ],
+    "client": [
         "GuardAnimationMixin"
     ],
     "injectors": {
