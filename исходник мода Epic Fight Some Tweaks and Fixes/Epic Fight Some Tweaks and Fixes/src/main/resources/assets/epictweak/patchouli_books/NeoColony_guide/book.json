@@ -1,0 +1,9 @@
+{
+    "name": "NeoColony GUIDE",
+    "landing_text": "Добро пожаловать в руководство по модпаку NeoColony!. Здесь вы найдёте описание всех изменений и механик.",
+    "version": 1,
+    "creative_tab": "minecraft:tools_and_utilities",
+    "use_resource_pack": true,
+    "model": "epictweak:NeoColony_guide",
+    "i18n": false
+}

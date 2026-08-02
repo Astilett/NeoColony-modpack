@@ -4,12 +4,14 @@ if (typeof Math.PI === 'undefined') {
     Math.PI = 3.141592653589793;
 }
 
+// Множители для кинжалов (используется максимальный из обеих рук)
 var BACKSTAB_MULTIPLIERS = {
-    'epicfight:wooden_dagger': 1.0625,
-    'epicfight:stone_dagger': 1.125,
+    'epicfight:wooden_dagger': 1.1,
+    'epicfight:stone_dagger': 1.2,
     'epicfight:iron_dagger': 1.3,
-    'epicfight:diamond_dagger': 1.35,
-    'epicfight:netherite_dagger': 1.5
+    'epicfight:golden_dagger': 1.1,
+    'epicfight:diamond_dagger': 1.4,
+    'epicfight:netherite_dagger': 1.55
 };
 
 var MinecraftForge = Java.loadClass('net.minecraftforge.common.MinecraftForge');
@@ -17,10 +19,12 @@ var LivingHurtEvent = Java.loadClass('net.minecraftforge.event.entity.living.Liv
 var LivingAttackEvent = Java.loadClass('net.minecraftforge.event.entity.living.LivingAttackEvent');
 var EventPriority = Java.loadClass('net.minecraftforge.eventbus.api.EventPriority');
 var Player = Java.loadClass('net.minecraft.world.entity.player.Player');
+var Date = Java.loadClass('java.util.Date');
 
 var yawStorage = {};
+var lastBackstabTime = {};
 
-// Сохраняем угол цели до разворота
+// Сохраняем yaw цели до разворота
 var attackHandler = new JavaAdapter(
     Java.loadClass('java.util.function.Consumer'),
     {
@@ -36,7 +40,7 @@ var attackHandler = new JavaAdapter(
 
 MinecraftForge.EVENT_BUS.addListener(EventPriority.LOWEST, false, LivingAttackEvent, attackHandler);
 
-// Основной обработчик урона
+// Основной обработчик урона с защитой от повторов
 var hurtHandler = new JavaAdapter(
     Java.loadClass('java.util.function.Consumer'),
     {
@@ -54,9 +58,9 @@ var hurtHandler = new JavaAdapter(
             if (mainId === 'minecraft:air') mainId = null;
             if (offId === 'minecraft:air') offId = null;
 
-            var totalMultiplier = 0;
-            if (mainId && BACKSTAB_MULTIPLIERS[mainId]) totalMultiplier += BACKSTAB_MULTIPLIERS[mainId];
-            if (offId && BACKSTAB_MULTIPLIERS[offId]) totalMultiplier += BACKSTAB_MULTIPLIERS[offId];
+            var mainMultiplier = BACKSTAB_MULTIPLIERS[mainId] || 0;
+            var offMultiplier = BACKSTAB_MULTIPLIERS[offId] || 0;
+            var totalMultiplier = Math.max(mainMultiplier, offMultiplier);
             if (totalMultiplier === 0) return;
 
             var savedYaw = yawStorage[entity.getId()];
@@ -64,9 +68,13 @@ var hurtHandler = new JavaAdapter(
             if (savedYaw === undefined) return;
 
             if (isBackstab(savedYaw, attacker, entity)) {
+                var now = new Date().getTime();
+                var last = lastBackstabTime[entity.getId()] || 0;
+                if (now - last < 100) return; // блокируем повторные вызовы в течение 100 мс
+
+                lastBackstabTime[entity.getId()] = now;
                 event.setAmount(amount * totalMultiplier);
-                console.log('[Dagger] Backstab! Damage: ' + amount + ' -> ' + event.amount);
-                // Частицы можно добавить позже безопасным способом
+                console.log('[Dagger] Backstab! main=' + mainMultiplier + ' off=' + offMultiplier + ' max=' + totalMultiplier + ' damage: ' + amount + ' -> ' + event.amount);
             }
         }
     }
@@ -87,5 +95,5 @@ function isBackstab(yaw, attacker, target) {
     var dirX = dx / len;
     var dirZ = dz / len;
     var dot = lookX * dirX + lookZ * dirZ;
-    return dot < 0.3; // угол > 72°
+    return dot < 0.3; // угол > 72° — спина
 }

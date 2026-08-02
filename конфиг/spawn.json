@@ -224,6 +224,66 @@
       "minecolonies:visitor"
     ],
     "result": "default",
+    "random": 0.005,
+    "nbt": {
+      "HandItems": [
+        {
+          "id": "epicfight:iron_dagger",
+          "Count": 1
+        },
+        {
+          "id": "epicfight:iron_dagger",
+          "Count": 1
+        }
+      ],
+      "HandDropChances": [0.0, 0.0]
+    }
+  },
+  {
+    "mob": [
+      "minecraft:zombie",
+      "minecraft:husk",
+      "minecraft:zombie_villager",
+      "minecolonies:amazon",
+      "minecolonies:amazonchief",
+      "minecolonies:amazonspearman",
+      "minecolonies:archerbarbarian",
+      "minecolonies:archermummy",
+      "minecolonies:archerpirate",
+      "minecolonies:barbarian",
+      "minecolonies:campamazon",
+      "minecolonies:campamazonchief",
+      "minecolonies:campamazonspearman",
+      "minecolonies:camparcherbarbarian",
+      "minecolonies:camparchermummy",
+      "minecolonies:camparcherpirate",
+      "minecolonies:campbarbarian",
+      "minecolonies:campchiefbarbarian",
+      "minecolonies:campchiefpirate",
+      "minecolonies:campdrownedarcherpirate",
+      "minecolonies:campdrownedchiefpirate",
+      "minecolonies:campdrownedpirate",
+      "minecolonies:campmummy",
+      "minecolonies:campnorsemenarcher",
+      "minecolonies:campnorsemenchief",
+      "minecolonies:camppharao",
+      "minecolonies:camppirate",
+      "minecolonies:campshieldmaiden",
+      "minecolonies:chiefbarbarian",
+      "minecolonies:chiefpirate",
+      "minecolonies:drownedarcherpirate",
+      "minecolonies:drownedchiefpirate",
+      "minecolonies:drownedpirate",
+      "minecolonies:mercenary",
+      "minecolonies:mummy",
+      "minecolonies:norsemenarcher",
+      "minecolonies:norsemenchief",
+      "minecolonies:pharao",
+      "minecolonies:pirate",
+      "minecolonies:shieldmaiden",
+      "minecolonies:visitor"
+    ],
+    "result": "default",
     "random": 0.015,
     "nbt": {
       "HandItems": [
@@ -404,6 +464,66 @@
       "minecolonies:visitor"
     ],
     "result": "default",
+    "random": 0.015,
+    "nbt": {
+      "HandItems": [
+        {
+          "id": "epicfight:stone_dagger",
+          "Count": 1
+        },
+        {
+          "id": "epicfight:stone_dagger",
+          "Count": 1
+        }
+      ],
+      "HandDropChances": [0.0, 0.0]
+    }
+  },
+  {
+    "mob": [
+      "minecraft:zombie",
+      "minecraft:husk",
+      "minecraft:zombie_villager",
+      "minecolonies:amazon",
+      "minecolonies:amazonchief",
+      "minecolonies:amazonspearman",
+      "minecolonies:archerbarbarian",
+      "minecolonies:archermummy",
+      "minecolonies:archerpirate",
+      "minecolonies:barbarian",
+      "minecolonies:campamazon",
+      "minecolonies:campamazonchief",
+      "minecolonies:campamazonspearman",
+      "minecolonies:camparcherbarbarian",
+      "minecolonies:camparchermummy",
+      "minecolonies:camparcherpirate",
+      "minecolonies:campbarbarian",
+      "minecolonies:campchiefbarbarian",
+      "minecolonies:campchiefpirate",
+      "minecolonies:campdrownedarcherpirate",
+      "minecolonies:campdrownedchiefpirate",
+      "minecolonies:campdrownedpirate",
+      "minecolonies:campmummy",
+      "minecolonies:campnorsemenarcher",
+      "minecolonies:campnorsemenchief",
+      "minecolonies:camppharao",
+      "minecolonies:camppirate",
+      "minecolonies:campshieldmaiden",
+      "minecolonies:chiefbarbarian",
+      "minecolonies:chiefpirate",
+      "minecolonies:drownedarcherpirate",
+      "minecolonies:drownedchiefpirate",
+      "minecolonies:drownedpirate",
+      "minecolonies:mercenary",
+      "minecolonies:mummy",
+      "minecolonies:norsemenarcher",
+      "minecolonies:norsemenchief",
+      "minecolonies:pharao",
+      "minecolonies:pirate",
+      "minecolonies:shieldmaiden",
+      "minecolonies:visitor"
+    ],
+    "result": "default",
     "random": 0.18,
     "nbt": {
       "HandItems": [
@@ -533,6 +653,66 @@
         },
         {
           "id": "minecraft:air",
+          "Count": 1
+        }
+      ],
+      "HandDropChances": [0.0, 0.0]
+    }
+  },
+  {
+    "mob": [
+      "minecraft:zombie",
+      "minecraft:husk",
+      "minecraft:zombie_villager",
+      "minecolonies:amazon",
+      "minecolonies:amazonchief",
+      "minecolonies:amazonspearman",
+      "minecolonies:archerbarbarian",
+      "minecolonies:archermummy",
+      "minecolonies:archerpirate",
+      "minecolonies:barbarian",
+      "minecolonies:campamazon",
+      "minecolonies:campamazonchief",
+      "minecolonies:campamazonspearman",
+      "minecolonies:camparcherbarbarian",
+      "minecolonies:camparchermummy",
+      "minecolonies:camparcherpirate",
+      "minecolonies:campbarbarian",
+      "minecolonies:campchiefbarbarian",
+      "minecolonies:campchiefpirate",
+      "minecolonies:campdrownedarcherpirate",
+      "minecolonies:campdrownedchiefpirate",
+      "minecolonies:campdrownedpirate",
+      "minecolonies:campmummy",
+      "minecolonies:campnorsemenarcher",
+      "minecolonies:campnorsemenchief",
+      "minecolonies:camppharao",
+      "minecolonies:camppirate",
+      "minecolonies:campshieldmaiden",
+      "minecolonies:chiefbarbarian",
+      "minecolonies:chiefpirate",
+      "minecolonies:drownedarcherpirate",
+      "minecolonies:drownedchiefpirate",
+      "minecolonies:drownedpirate",
+      "minecolonies:mercenary",
+      "minecolonies:mummy",
+      "minecolonies:norsemenarcher",
+      "minecolonies:norsemenchief",
+      "minecolonies:pharao",
+      "minecolonies:pirate",
+      "minecolonies:shieldmaiden",
+      "minecolonies:visitor"
+    ],
+    "result": "default",
+    "random": 0.18,
+    "nbt": {
+      "HandItems": [
+        {
+          "id": "epicfight:wooden_dagger",
+          "Count": 1
+        },
+        {
+          "id": "epicfight:wooden_dagger",
           "Count": 1
         }
       ],

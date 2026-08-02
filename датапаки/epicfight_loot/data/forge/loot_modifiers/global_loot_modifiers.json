@@ -1,7 +1,6 @@
 {
   "replace": false,
   "entries": [
-    "epicfight:skillbook_in_chests",
-    "epicfight:skillbook_in_barrels"
+    "epicfight:skillbook_everywhere"
   ]
 }

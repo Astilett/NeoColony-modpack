@@ -5,10 +5,12 @@
     "compatibilityLevel": "JAVA_17",
     "refmap": "epictweak.refmap.json",
     "mixins": [
-        "ShieldPierceMixin"
+        "ShieldPierceMixin",
+        "WeaponInnateStatMixin"
     ],
     "client": [
-        "GuardAnimationMixin"
+        "GuardAnimationMixin",
+        "WeaponInnateHUDMixin"
     ],
     "injectors": {
         "defaultRequire": 1

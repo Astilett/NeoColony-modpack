@@ -1,6 +1,6 @@
 const EFFECT_ID = 'kubejs:bleeding';
-const EFFECT_DURATION = 4 * 20;          
-const BASE_DAMAGE = 0.75;
+const EFFECT_DURATION = 4 * 20;
+const BASE_DAMAGE = 0.8;
 const DAMAGE_INTERVAL = 2 * 20;
 const MAX_STACKS = 10;
 const STAMINA_DRAIN_PER_STACK = 0.0125;
@@ -9,12 +9,18 @@ const BASE_BLEED_CHANCE = 1.0;
 const ARMOR_PENALTY_PER_PIECE = 0.15;
 
 const BLEEDING_WEAPONS = {
-    'epicfight:wooden_tachi':  1,
-    'epicfight:stone_tachi':   1,
-    'epicfight:iron_tachi':    1,
-    'epicfight:golden_tachi':  1,
-    'epicfight:diamond_tachi': 2,
-    'epicfight:netherite_tachi': 3
+    'epicfight:wooden_tachi':  0.5,
+    'epicfight:stone_tachi':   0.5,
+    'epicfight:iron_tachi':    0.5,
+    'epicfight:golden_tachi':  0.5,
+    'epicfight:diamond_tachi': 1,
+    'epicfight:netherite_tachi': 2,
+    'epicfight:wooden_spear':  0.25,
+    'epicfight:stone_spear':   0.25,
+    'epicfight:iron_spear':    0.25,
+    'epicfight:golden_spear':  0.25,
+    'epicfight:diamond_spear': 0.5,
+    'epicfight:netherite_spear': 1
 };
 
 function getArmorCount(entity) {
@@ -33,7 +39,8 @@ EntityEvents.hurt(event => {
     
     const player = source.player;
     const weapon = player.getMainHandItem();
-    const stacksToAdd = BLEEDING_WEAPONS[weapon.id];
+    const weaponId = weapon.id;
+    const stacksToAdd = BLEEDING_WEAPONS[weaponId];
     
     if (!stacksToAdd) return;
     
@@ -42,14 +49,34 @@ EntityEvents.hurt(event => {
     
     if (Math.random() > chance) return;
     
-    const currentEffect = entity.getEffect(EFFECT_ID);
+    // Накопитель дробных стаков (хранится в persistentData)
+    const pData = entity.persistentData;
+    let fraction = pData.getDouble('bleedingFraction');
+    fraction += stacksToAdd;
     
+    // Сколько целых стаков можно наложить
+    const wholeStacks = Math.floor(fraction);
+    fraction -= wholeStacks;
+    pData.putDouble('bleedingFraction', fraction);
+    
+    if (wholeStacks <= 0) {
+        // Целых стаков нет, но эффект уже мог быть — тогда просто обновляем длительность
+        const currentEffect = entity.getEffect(EFFECT_ID);
+        if (currentEffect) {
+            entity.potionEffects.add(EFFECT_ID, EFFECT_DURATION, currentEffect.getAmplifier(), false, true);
+            entity.persistentData.putLong('lastBleedUpdateTick', tickCounter);
+        }
+        return;
+    }
+    
+    // Накладываем целые стаки
+    const currentEffect = entity.getEffect(EFFECT_ID);
     if (currentEffect) {
-        let newAmplifier = currentEffect.getAmplifier() + stacksToAdd;
+        let newAmplifier = currentEffect.getAmplifier() + wholeStacks;
         if (newAmplifier > MAX_STACKS - 1) newAmplifier = MAX_STACKS - 1;
         entity.potionEffects.add(EFFECT_ID, EFFECT_DURATION, newAmplifier, false, true);
     } else {
-        let initialAmplifier = stacksToAdd - 1;
+        let initialAmplifier = Math.min(wholeStacks, MAX_STACKS) - 1;
         if (initialAmplifier > MAX_STACKS - 1) initialAmplifier = MAX_STACKS - 1;
         entity.potionEffects.add(EFFECT_ID, EFFECT_DURATION, initialAmplifier, false, true);
     }
@@ -65,36 +92,35 @@ ServerEvents.tick(event => {
     
     tickCounter++;
     
-    // --- Замена чужого эффекта с суммированием стаков и сохранением его длительности ---
+    // --- Подмена чужого эффекта (каждый тик) ---
     server.getAllLevels().forEach(world => {
         world.entities.forEach(entity => {
             if (!entity.isLiving()) return;
             const foreignEffect = entity.getEffect('attributeslib:bleeding');
             if (!foreignEffect) return;
             
-            // Запоминаем исходную длительность внешнего эффекта
             const foreignDuration = foreignEffect.duration;
             entity.removeEffect('attributeslib:bleeding');
             
             const ourEffect = entity.getEffect(EFFECT_ID);
             const lastUpdate = entity.persistentData.getLong('lastBleedUpdateTick');
             
-            if (ourEffect && lastUpdate == tickCounter) {
-                return; // уже был удар тати в этом тике, внешний эффект игнорируем
-            }
+            if (ourEffect && lastUpdate == tickCounter) return;
             
-            const foreignStacks = foreignEffect.getAmplifier() + 1;
+            const armorCount = getArmorCount(entity);
+            const chance = Math.max(0, BASE_BLEED_CHANCE - armorCount * ARMOR_PENALTY_PER_PIECE);
+            if (Math.random() > chance) return;
+            
+            const foreignStacks = foreignEffect.amplifier + 1;
             
             if (ourEffect) {
-                const currentStacks = ourEffect.getAmplifier() + 1;
+                const currentStacks = ourEffect.amplifier + 1;
                 const totalStacks = Math.min(currentStacks + foreignStacks, MAX_STACKS);
                 const newAmplifier = totalStacks - 1;
-                // Используем длительность внешнего эффекта
                 entity.potionEffects.add(EFFECT_ID, foreignDuration, newAmplifier, false, true);
             } else {
                 const initialStacks = Math.min(foreignStacks, MAX_STACKS);
                 const initialAmplifier = initialStacks - 1;
-                // Первое наложение от внешнего источника тоже с его длительностью
                 entity.potionEffects.add(EFFECT_ID, foreignDuration, initialAmplifier, false, true);
             }
         });

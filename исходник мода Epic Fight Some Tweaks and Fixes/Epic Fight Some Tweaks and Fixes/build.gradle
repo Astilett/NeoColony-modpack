@@ -23,9 +23,22 @@ minecraft {
     }
 }
 
+repositories {
+    // Только для Patchouli
+    maven {
+        url "https://maven.blamejared.com"
+    }
+}
+
 dependencies {
     minecraft 'net.minecraftforge:forge:1.20.1-47.4.10'
     implementation files('libs/epicfight-forge-20.12.4-1.20.1.jar')
+    
+    // Patchouli (компиляция, игрок должен установить мод самостоятельно)
+    compileOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84-FORGE")
+    // Для тестов в среде разработки можно добавить runtimeOnly, если Patchouli лежит в mods
+    // runtimeOnly fg.deobf("vazkii.patchouli:Patchouli:1.20.1-84-FORGE")
+    
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
 
