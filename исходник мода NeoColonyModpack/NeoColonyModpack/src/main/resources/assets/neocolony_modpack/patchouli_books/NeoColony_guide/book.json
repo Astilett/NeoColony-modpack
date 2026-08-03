@@ -1,0 +1,9 @@
+{
+    "name": "Руководство NeoColony",
+    "landing_text": "Добро пожаловать в руководство по сборке NeoColony! Здесь описаны все основные механики, нововведения и т.д.",
+    "version": 1,
+    "creative_tab": "minecraft:tools_and_utilities",
+    "use_resource_pack": true,
+    "model": "neocolony_modpack:NeoColony_guide",
+    "i18n": false
+}
