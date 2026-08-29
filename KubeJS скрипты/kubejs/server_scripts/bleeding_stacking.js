@@ -3,24 +3,24 @@ const EFFECT_DURATION = 4 * 20;
 const BASE_DAMAGE = 0.8;
 const DAMAGE_INTERVAL = 2 * 20;
 const MAX_STACKS = 10;
-const STAMINA_DRAIN_PER_STACK = 0.0125;
+const STAMINA_DRAIN_PER_STACK = 0.0075;
 const STAMINA_THRESHOLD = 0.2;
 const BASE_BLEED_CHANCE = 1.0;
 const ARMOR_PENALTY_PER_PIECE = 0.15;
 
 const BLEEDING_WEAPONS = {
-    'epicfight:wooden_tachi':  0.5,
-    'epicfight:stone_tachi':   0.5,
-    'epicfight:iron_tachi':    0.5,
-    'epicfight:golden_tachi':  0.5,
-    'epicfight:diamond_tachi': 1,
-    'epicfight:netherite_tachi': 2,
-    'epicfight:wooden_spear':  0.25,
-    'epicfight:stone_spear':   0.25,
-    'epicfight:iron_spear':    0.25,
-    'epicfight:golden_spear':  0.25,
-    'epicfight:diamond_spear': 0.5,
-    'epicfight:netherite_spear': 1
+    // 'epicfight:wooden_tachi':  0.5,
+    // 'epicfight:stone_tachi':   0.5,
+    // 'epicfight:iron_tachi':    0.5,
+    // 'epicfight:golden_tachi':  0.5,
+    // 'epicfight:diamond_tachi': 1,
+    // 'epicfight:netherite_tachi': 2,
+    // 'epicfight:wooden_spear':  0.25,
+    // 'epicfight:stone_spear':   0.25,
+    // 'epicfight:iron_spear':    0.25,
+    // 'epicfight:golden_spear':  0.25,
+    // 'epicfight:diamond_spear': 0.5,
+    // 'epicfight:netherite_spear': 1 <--- старая карта оружия
 };
 
 function getArmorCount(entity) {

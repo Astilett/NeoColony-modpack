@@ -1,5 +1,11 @@
 [
   {
+    "maxmobs": {
+      "result": "deny",
+      "max": 85
+    }
+  },
+  {
     "mob": [
       "minecraft:zombie",
       "minecraft:husk",

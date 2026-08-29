@@ -1,0 +1,10 @@
+{
+    "type": "epicfight:crossbow",
+    "attributes": {
+        "two_hand": {
+            "armor_negation": 40.0,
+                "impact": 2.6,
+            "max_strikes": 0
+        }
+    }
+ }

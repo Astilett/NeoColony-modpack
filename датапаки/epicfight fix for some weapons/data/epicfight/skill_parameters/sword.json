@@ -1,9 +1,0 @@
-{
-  "executors": [
-    {
-      "type": "epicfight:set_skill_priority",
-      "target": "blocking",
-      "priority": 0
-    }
-  ]
-}
